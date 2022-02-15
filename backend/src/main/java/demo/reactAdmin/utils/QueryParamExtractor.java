@@ -49,6 +49,8 @@ public class QueryParamExtractor {
         }
         sort = JSONUtils.toJsonArray(sortStr);
 
+        System.out.println("filter: " + filter);
+
 
         return new QueryParamWrapper(filter, filterOr, range, sort);
     }

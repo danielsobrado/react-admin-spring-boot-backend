@@ -22,6 +22,7 @@ public class Customer {
     public String firstSeen;
     public String lastSeen;
     public boolean hasNewsletter;
+    public boolean hasOrdered;
 
     @ManyToMany(cascade = {CascadeType.DETACH})
     public Set<Group> groups;

@@ -1,6 +1,5 @@
 package demo.reactAdmin.services;
 
-
 import demo.reactAdmin.entities.QueryParamWrapper;
 import demo.reactAdmin.repositories.BaseRepository;
 import demo.reactAdmin.specifications.CustomSpecifications;
@@ -23,7 +22,7 @@ import java.util.Set;
 
 @Service
 //from: https://github.com/zifnab87/spring-boot-rest-api-helpers/blob/master/src/main/java/springboot/rest/services/FilterService.java
-public class FilterService<T, I extends Serializable> {
+public class    FilterService<T, I extends Serializable> {
 
     @Autowired
     private Environment env;

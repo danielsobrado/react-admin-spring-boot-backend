@@ -47,6 +47,7 @@ public class CustomerController {
     public Iterable<Customer> filterBy(
             @RequestParam(required = false, name = "filter") String filterStr,
             @RequestParam(required = false, name = "range") String rangeStr, @RequestParam(required = false, name="sort") String sortStr) {
+        System.out.println("Customer filterBy - filterStr: " + filterStr);
         QueryParamWrapper wrapper = QueryParamExtractor.extract(filterStr, rangeStr, sortStr);
         return filterService.filterBy(wrapper, repo);
     }
