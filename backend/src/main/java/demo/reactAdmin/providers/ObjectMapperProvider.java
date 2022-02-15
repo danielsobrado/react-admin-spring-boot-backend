@@ -22,7 +22,7 @@ public class ObjectMapperProvider {
 
         mapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
         mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-        String usesSnakeCase = env.getProperty("spring-boot-rest-api-helpers.use-snake-case");
+        String usesSnakeCase = env.getProperty("react-admin-api.use-snake-case");
         if (usesSnakeCase != null && usesSnakeCase.equals("true")) {
             mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
         }

@@ -34,7 +34,7 @@ public class    FilterService<T, I extends Serializable> {
     public long countBy(QueryParamWrapper queryParamWrapper, BaseRepository<T, I> repo) {
         JSONObject filter = queryParamWrapper.getFilter();
         JSONArray filterOr = queryParamWrapper.getFilterOr();
-        String usesSnakeCase = env.getProperty("spring-boot-rest-api-helpers.use-snake-case");
+        String usesSnakeCase = env.getProperty("react-admin-api.use-snake-case");
         if (filter != null && filter.length() > 0) {
             HashMap<String, Object> map = (HashMap<String, Object>) filter.toMap();
 
