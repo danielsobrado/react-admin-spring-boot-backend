@@ -17,7 +17,7 @@ import demo.reactAdmin.providers.ObjectMapperProvider;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.paths.RelativePathProvider;
+import springfox.documentation.spring.web.paths.DefaultPathProvider;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -43,7 +43,7 @@ public class ReactAdminDemoApplication {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
         config.addAllowedOrigin("*");
-        config.addAllowedHeader("*");
+        config.addAllowedHeader("*");  // Insecure, but for demo purposes it's ok
         config.addAllowedHeader("Content-Range");
         config.addExposedHeader("X-Total-Count");
         config.addExposedHeader("Content-Range");
@@ -82,9 +82,9 @@ public class ReactAdminDemoApplication {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .pathProvider(new RelativePathProvider(servletContext) {
+                .pathProvider(new DefaultPathProvider() {
                     @Override
-                    public String getApplicationBasePath() {
+                    public String getDocumentationPath() {
                         return "/api/v1";
                     }
                 })

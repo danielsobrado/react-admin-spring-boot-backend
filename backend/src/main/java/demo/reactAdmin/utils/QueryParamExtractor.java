@@ -13,8 +13,6 @@ public class QueryParamExtractor {
 
     public static QueryParamWrapper extract(String filterStr, String rangeStr, String sortStr) {
 
-
-
         Object filterJsonOrArray;
         if (StringUtils.isBlank(filterStr)) {
             filterStr = "{}";
