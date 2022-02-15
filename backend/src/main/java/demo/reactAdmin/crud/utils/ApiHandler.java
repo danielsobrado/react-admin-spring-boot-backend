@@ -6,7 +6,8 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.stereotype.Service;
-import springboot.rest.utils.JSON;
+
+import demo.reactAdmin.utils.JSONUtils;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -183,7 +184,7 @@ public class ApiHandler {
     public String authenticate(String username, String password) {
         Map<String, String> headers = new HashMap<>();
         String bodyJson = "{\"username\":\""+username+"\", \"password\":\""+password+"\"}";
-        TokenValue obj = JSON.toObject(this.sendPost("http://localhost:8080/api/v1/auth/login",
+        TokenValue obj = JSONUtils.toObject(this.sendPost("http://localhost:8080/api/v1/auth/login",
                 bodyJson, headers), TokenValue.class);
         String token = obj.token;
         System.out.println("authenticate: http://localhost:8080/api/v1/auth/login");

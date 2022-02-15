@@ -5,9 +5,9 @@ import demo.reactAdmin.crud.entities.Product;
 import demo.reactAdmin.crud.repos.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import springboot.rest.entities.QueryParamWrapper;
-import springboot.rest.services.FilterService;
-import springboot.rest.utils.QueryParamExtractor;
+import demo.reactAdmin.entities.QueryParamWrapper;
+import demo.reactAdmin.services.FilterService;
+import demo.reactAdmin.utils.QueryParamExtractor;
 
 @RestController
 @RequestMapping("api/v1")

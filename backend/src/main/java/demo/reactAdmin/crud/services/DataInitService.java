@@ -9,11 +9,12 @@ import demo.reactAdmin.crud.repos.ExampleRepository;
 import demo.reactAdmin.crud.repos.GroupRepository;
 import demo.reactAdmin.crud.repos.UserRepository;
 import demo.reactAdmin.crud.utils.ApiHandler;
+import demo.reactAdmin.utils.JSONUtils;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import springboot.rest.utils.JSON;
 
 import javax.servlet.ServletContext;
 import java.io.File;
@@ -119,7 +120,7 @@ public class DataInitService {
             fis.read(data);
             fis.close();
             String dataStr = new String(data, "UTF-8");
-            jsonObj = JSON.toJsonObject(dataStr);
+            jsonObj = JSONUtils.toJsonObject(dataStr);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
