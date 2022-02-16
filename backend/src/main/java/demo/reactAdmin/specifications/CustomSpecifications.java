@@ -92,8 +92,9 @@ public class CustomSpecifications<T> {
         for (Map.Entry e : map.entrySet()) {
             String key = (String) e.getKey();
             Object val = e.getValue();
-            String keyCamelCase = convertToCamelCase(key);
-            String cleanKey = cleanUpKey(keyCamelCase);
+            // String keyCamelCase = convertToCamelCase(key);
+            // String cleanKey = cleanUpKey(keyCamelCase);
+            String cleanKey = cleanUpKey(key);
 
             Attribute a = root.getModel().getAttribute(cleanKey);
             if (attributes.contains(a)) {
@@ -107,14 +108,15 @@ public class CustomSpecifications<T> {
     public Predicate handleAllCases(CriteriaBuilder builder, Root root, Join join, CriteriaQuery query, Attribute a, String key, Object val) {
         boolean isValueCollection = val instanceof Collection;
         boolean isValueMap = val instanceof Map;
-        String keyCamelCase = convertToCamelCase(key);
-        String cleanKey = cleanUpKey(keyCamelCase);
+        // String keyCamelCase = convertToCamelCase(key);
+        // String cleanKey = cleanUpKey(keyCamelCase);
+        String cleanKey = cleanUpKey(key);
         boolean isKeyClean = cleanKey.equals(key);
         boolean isNegation = key.endsWith("Not");
-        boolean isGt = key.endsWith("Gt") || key.endsWith("_gt");
-        boolean isGte = key.endsWith("Gte") || key.endsWith("_gte");
-        boolean isLt = key.endsWith("Lt") || key.endsWith("_lt");
-        boolean isLte = key.endsWith("Lte") || key.endsWith("_lte");
+        boolean isGt = key.endsWith("Gt");
+        boolean isGte = key.endsWith("Gte");
+        boolean isLt = key.endsWith("Lt");
+        boolean isLte = key.endsWith("Lte");
         boolean isConjunction = key.endsWith("And");
         boolean isAssociation = a.isAssociation();
 
@@ -184,7 +186,7 @@ public class CustomSpecifications<T> {
 
     private String cleanUpKey(String key) {
 
-        List<String> postfixes = Arrays.asList("Gte", "Gt", "Lte", "Lt", "Not", "And", "_gte", "_gt", "_lte", "_lt");
+        List<String> postfixes = Arrays.asList("Gte", "Gt", "Lte", "Lt", "Not", "And");
         for (String postfix : postfixes) {
             if (key.endsWith(postfix)) {
                 return key.substring(0, key.length() - postfix.length());

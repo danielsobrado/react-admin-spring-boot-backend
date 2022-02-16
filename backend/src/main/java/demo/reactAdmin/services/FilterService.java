@@ -82,7 +82,7 @@ public class    FilterService<T, I extends Serializable> {
     private List<Sort.Order> sortHelper(JSONArray sort, String primaryKeyName) {
 
         List<Sort.Order> sortOrders = new ArrayList<>();
-        String usesSnakeCase = env.getProperty("spring-boot-rest-api-helpers.use-snake-case");
+        String usesSnakeCase = env.getProperty("react-admin-api.use-snake-case");
         if (sort.length() % 2 != 0) {
             throw new IllegalArgumentException("sort should have even length given as array e.g ['name', 'ASC', 'birthDate', 'DESC']");
         }
@@ -108,7 +108,7 @@ public class    FilterService<T, I extends Serializable> {
                                        QueryParamWrapper queryParamWrapper,
                                        String primaryKeyName,
                                        List<String> searchOnlyInFields) {
-        String usesSnakeCase = env.getProperty("spring-boot-rest-api-helpers.use-snake-case");
+        String usesSnakeCase = env.getProperty("react-admin-api.use-snake-case");
 
         Sort sortObj;
         JSONObject filter = queryParamWrapper.getFilter();
