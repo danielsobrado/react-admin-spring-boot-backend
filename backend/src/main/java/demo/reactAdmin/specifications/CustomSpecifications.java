@@ -106,8 +106,6 @@ public class CustomSpecifications<T> {
     public Predicate handleAllCases(CriteriaBuilder builder, Root root, Join join, CriteriaQuery query, Attribute a, String key, Object val) {
         boolean isValueCollection = val instanceof Collection;
         boolean isValueMap = val instanceof Map;
-        // String keyCamelCase = convertToCamelCase(key);
-        // String cleanKey = cleanUpKey(keyCamelCase);
         String cleanKey = cleanUpKey(key);
         boolean isKeyClean = cleanKey.equals(key);
         boolean isNegation = key.endsWith("Not");
@@ -304,9 +302,10 @@ public class CustomSpecifications<T> {
 
     private Predicate createGtePredicate(CriteriaBuilder builder, Root root, Attribute a, Object val) {
         if (val instanceof String) {
-            Timestamp timestamp = timeStamp((String)val);
+            Timestamp timestamp = timeStamp((String)val); // Check here
             if (timestamp != null) {
-                return builder.greaterThanOrEqualTo(builder.lower(root.get(a.getName())), timestamp);
+                // return builder.greaterThanOrEqualTo(builder.lower(root.get(a.getName())), timestamp);
+                return builder.greaterThanOrEqualTo(builder.lower(root.get(a.getName())), ((String) val));
             }
             return builder.greaterThanOrEqualTo(builder.lower(root.get(a.getName())), ((String) val).toLowerCase());
         } else if (val instanceof Integer) {

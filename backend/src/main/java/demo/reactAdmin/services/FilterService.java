@@ -3,6 +3,8 @@ package demo.reactAdmin.services;
 import demo.reactAdmin.entities.QueryParamWrapper;
 import demo.reactAdmin.repositories.BaseRepository;
 import demo.reactAdmin.specifications.CustomSpecifications;
+import javassist.bytecode.stackmap.BasicBlock.Catch;
+
 import org.apache.commons.text.CaseUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -134,10 +136,9 @@ public class    FilterService<T, I extends Serializable> {
                         if (usesSnakeCase != null && usesSnakeCase.equals("true")) {
                             map = convertToCamelCase(map);
                         }
-
-                        return specifications.customSpecificationBuilder(builder, query, root,
-                                map, searchOnlyInFields
-                        );
+                            return specifications.customSpecificationBuilder(builder, query, root,
+                                    map, searchOnlyInFields
+                            );
                     }, PageRequest.of(page, size, sortObj));
 
         } else if (filterOr != null && filterOr.length() > 0) {
