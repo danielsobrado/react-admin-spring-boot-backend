@@ -92,8 +92,6 @@ public class CustomSpecifications<T> {
         for (Map.Entry e : map.entrySet()) {
             String key = (String) e.getKey();
             Object val = e.getValue();
-            // String keyCamelCase = convertToCamelCase(key);
-            // String cleanKey = cleanUpKey(keyCamelCase);
             String cleanKey = cleanUpKey(key);
 
             Attribute a = root.getModel().getAttribute(cleanKey);

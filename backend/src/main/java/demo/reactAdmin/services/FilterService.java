@@ -163,6 +163,7 @@ public class    FilterService<T, I extends Serializable> {
         for (String key : keys) {
             Object val = snakeCaseMap.get(key);
             camelCaseMap.put(convertToCamelCase(key), val);
+            camelCaseMap.remove(key);
         }
         return camelCaseMap;
     }
