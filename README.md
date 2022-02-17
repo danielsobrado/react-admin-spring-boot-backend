@@ -36,7 +36,7 @@ spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL8Dialect
 spring.jpa.properties.hibernate.dialect.storage_engine=innodb 
 ```
 
-## How to run (Front-End)
+## How to run: Front-End
 
 The react-admin Front-End is available in the /frontend folder, you can compile it with:
 
@@ -52,7 +52,7 @@ yarn start
 
 WIP
 
-## Back-End
+## How to run: Back-End
 
 The Spring Boot backend is available in the /backend folder, you can compile it with:
 
