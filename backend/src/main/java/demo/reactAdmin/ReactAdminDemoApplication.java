@@ -44,9 +44,9 @@ public class ReactAdminDemoApplication {
         config.setAllowCredentials(true);
         config.addAllowedOrigin("*");
         config.addAllowedHeader("*");  // Insecure, but for demo purposes it's ok
-        config.addAllowedHeader("Content-Range");
+        config.addAllowedHeader("content-range");
         config.addExposedHeader("X-Total-Count");
-        config.addExposedHeader("Content-Range");
+        config.addExposedHeader("content-range");
         config.addExposedHeader("Content-Type");
         config.addExposedHeader("Accept");
         config.addExposedHeader("X-Requested-With");

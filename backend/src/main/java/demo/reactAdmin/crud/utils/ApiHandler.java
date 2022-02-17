@@ -40,8 +40,8 @@ public class ApiHandler {
             }
             con.setRequestProperty("User-Agent", USER_AGENT);
             con.setRequestProperty("Access-Control-Allow-Origin", "*");
-            con.setRequestProperty("Access-Control-Expose-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-            con.setRequestProperty("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+            con.setRequestProperty("Access-Control-Expose-Headers", "content-range, Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+            con.setRequestProperty("Access-Control-Allow-Headers", "content-range, Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
             int responseCode = con.getResponseCode();
             System.out.println("\nSending 'GET' request to URL : " + url);

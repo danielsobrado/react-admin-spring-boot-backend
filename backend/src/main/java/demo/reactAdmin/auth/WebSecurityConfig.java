@@ -19,6 +19,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String LOGIN_ENDPOINT = "/api/v1/auth/login";
 
+    private static final String TOKEN_REFRESH_ENTRY_POINT = "/api/v1/auth/token";
+
     private static final String FILE_ENDPOINT = "/api/v1/file/**";
 
     private static final String SWAGGER_UI_PATH = "/api/v1/swagger-ui.html";
@@ -42,6 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers(HttpMethod.POST, LOGIN_ENDPOINT).permitAll()
                 .antMatchers(HttpMethod.GET, FILE_ENDPOINT).permitAll()
+                .antMatchers(HttpMethod.POST, TOKEN_REFRESH_ENTRY_POINT).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 // We filter the api/login requests
@@ -72,4 +75,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder encoder() {
         return passwordEncoderProvider.getEncoder();
     }
+
 }
