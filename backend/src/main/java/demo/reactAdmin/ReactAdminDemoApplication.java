@@ -1,8 +1,11 @@
 package demo.reactAdmin;
 
-import demo.reactAdmin.crud.services.DataInitService;
-import com.fasterxml.jackson.databind.*;
+import javax.servlet.ServletContext;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -13,6 +16,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import demo.reactAdmin.crud.services.DataInitService;
 import demo.reactAdmin.providers.ObjectMapperProvider;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -20,8 +25,6 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.paths.RelativePathProvider;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import javax.servlet.ServletContext;
 
 @SpringBootApplication(scanBasePackages = {"demo.reactAdmin", "springboot.rest"})
 @EnableSwagger2
@@ -57,7 +60,9 @@ public class ReactAdminDemoApplication {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(ReactAdminDemoApplication.class, args);
+        SpringApplication application = new SpringApplication(ReactAdminDemoApplication.class);
+        application.setBannerMode(Banner.Mode.OFF);
+        application.run(args);
     }
 
     @EventListener(ApplicationReadyEvent.class)

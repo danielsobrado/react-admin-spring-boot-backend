@@ -57,6 +57,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <resources>
+                        <resource>
+                            <filtering>true</filtering>
+                            <directory>src/main/resources/</directory>
+                        </resource>
+                    </resources>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>

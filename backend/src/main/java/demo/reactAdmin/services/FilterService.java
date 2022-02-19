@@ -3,7 +3,6 @@ package demo.reactAdmin.services;
 import demo.reactAdmin.entities.QueryParamWrapper;
 import demo.reactAdmin.repositories.BaseRepository;
 import demo.reactAdmin.specifications.CustomSpecifications;
-import javassist.bytecode.stackmap.BasicBlock.Catch;
 
 import org.apache.commons.text.CaseUtils;
 import org.json.JSONArray;

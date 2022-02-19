@@ -25,16 +25,6 @@ public class CustomSpecifications<T> {
     @PersistenceContext
     private EntityManager em;
 
-    private HashMap<String, Object> convertToCamelCase(HashMap<String, Object> snakeCaseMap) {
-        Set<String> keys = snakeCaseMap.keySet();
-        HashMap<String, Object> camelCaseMap = new HashMap<>(snakeCaseMap);
-        for (String key : keys) {
-            Object val = snakeCaseMap.get(key);
-            camelCaseMap.put(convertToCamelCase(key), val);
-        }
-        return camelCaseMap;
-    }
-
     public String convertToCamelCase(String snakeCaseStr) {
         return CaseUtils.toCamelCase(snakeCaseStr,false, new char[]{'_'});
     }

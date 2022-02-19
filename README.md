@@ -10,6 +10,7 @@ The backend inspired on the work of:
 
 Work In Progress: Adapt Auth and Data providers to make use of Spring Boot Backend.
 
+The following instructions describe how to build and deploy this example:
 ## MySQL setup
 
 Install MySQL and create the demo database and user required for this example to run:
