@@ -41,6 +41,10 @@ spring.jpa.properties.hibernate.dialect.storage_engine=innodb
 
 The UI for swagger can be found on: [swagger](http://localhost:8080/swagger-ui/index.html)
 
+Example:
+
+!([SWAGGER UI](https://i.imgur.com/enfbxkJ.png))
+
 The OpenAPI configuration is found on **`application.properties`**:
 
 ```properties
