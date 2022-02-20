@@ -43,7 +43,7 @@ The UI for swagger can be found on: [swagger](http://localhost:8080/swagger-ui/i
 
 Example:
 
-!([SWAGGER UI](https://i.imgur.com/enfbxkJ.png))
+![SWAGGER UI](https://i.imgur.com/enfbxkJ.png)
 
 The OpenAPI configuration is found on **`application.properties`**:
 
