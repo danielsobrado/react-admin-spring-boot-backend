@@ -21,3 +21,4 @@
 /frontend/npm-debug.log*
 /frontend/yarn-debug.log*
 /frontend/yarn-error.log*
+backend/dependency-reduced-pom.xml

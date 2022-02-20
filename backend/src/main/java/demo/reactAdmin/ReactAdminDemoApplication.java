@@ -1,5 +1,7 @@
 package demo.reactAdmin;
 
+import java.util.Collections;
+
 import javax.servlet.ServletContext;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,15 +21,16 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import demo.reactAdmin.crud.services.DataInitService;
 import demo.reactAdmin.providers.ObjectMapperProvider;
-import springfox.documentation.builders.PathSelectors;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.paths.RelativePathProvider;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+// import springfox.documentation.builders.PathSelectors;
+// import springfox.documentation.builders.RequestHandlerSelectors;
+// import springfox.documentation.service.ApiInfo;
+// import springfox.documentation.service.Contact;
+// import springfox.documentation.spi.DocumentationType;
+// import springfox.documentation.spring.web.plugins.Docket;
+// import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication(scanBasePackages = {"demo.reactAdmin", "springboot.rest"})
-@EnableSwagger2
+// @EnableSwagger2
 public class ReactAdminDemoApplication {
 
 
@@ -84,20 +87,60 @@ public class ReactAdminDemoApplication {
         return objMapperProvider.getObjectMapper();
     }
 
-    @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .pathProvider(new RelativePathProvider(servletContext) {
-                    @Override
-                    public String getApplicationBasePath() {
-                        return "/api/v1";
-                    }
-                })
-                .select()
-                .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.any())
+    // @Bean
+    // public Docket api() {
+    //     return new Docket(DocumentationType.SWAGGER_2)
+    //             .pathProvider(new RelativePathProvider(servletContext) {
+    //                 @Override
+    //                 public String getApplicationBasePath() {
+    //                     return "/api/v1";
+    //                 }
+    //             })
+    //             .select()
+    //             .apis(RequestHandlerSelectors.any())
+    //             .paths(PathSelectors.any())
 
-                .build();
-    }
+    //             .build();
+    // }
+
+    // @Bean
+    // public Docket api() { 
+
+    //     Docket docket = new Docket(DocumentationType.SWAGGER_2)
+    //       .select()                                  
+    //       .apis(RequestHandlerSelectors.any())  
+    //       .paths(PathSelectors.ant("/api/v1/**"))            
+    //     //   .paths(PathSelectors.any())                          
+    //       .build();    
+          
+    //     docket.pathMapping("/api/v1");
+
+    //     return docket;
+    // }
+
+    // private ApiInfo apiInfo() {
+    //     return new ApiInfo("MyApp Rest APIs",
+    //             "APIs for MyApp.",
+    //             "1.0",
+    //             "Terms of service",
+    //             new Contact("test", "www.org.com", "test@emaildomain.com"),
+    //             "License of API",
+    //             "API license URL",
+    //             Collections.emptyList());
+    // }
+
+    // @Bean
+    // public Docket api() {
+    //     Docket docket = new Docket(DocumentationType.OAS_30)
+    //             .apiInfo(apiInfo())
+    //             .select()
+    //             .apis(RequestHandlerSelectors.any())
+    //             .paths(PathSelectors.ant("/api/v1/**"))  
+    //             .build();
+
+    //             docket.pathMapping("/api/v1");
+
+    //             return docket;
+    // }
 
 }

@@ -18,10 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String LOGIN_ENDPOINT = "/api/v1/auth/login";
-
     private static final String FILE_ENDPOINT = "/api/v1/file/**";
-
-    private static final String SWAGGER_UI_PATH = "/api/v1/swagger-ui.html";
 
     @Autowired
     private MyUserDetailsService userDetailsService;
@@ -29,17 +26,33 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private PasswordEncoderProvider passwordEncoderProvider;
 
-
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers(FILE_ENDPOINT, SWAGGER_UI_PATH);
-    }
-
+    // @Override
+    // public void configure(WebSecurity web) throws Exception {
+    //     web.ignoring().antMatchers(FILE_ENDPOINT, SWAGGER_UI_PATH);
+    // }
+    
+    private static final String[] AUTH_WHITELIST = {
+        // -- Swagger UI v2
+        "/v2/api-docs",
+        "/swagger-resources",
+        "/swagger-resources/**",
+        "/configuration/ui",
+        "/configuration/security",
+        "/swagger-ui.html",
+        "/webjars/**",
+        // -- Swagger UI v3 (OpenAPI)
+        "/v3/api-docs/**",
+        "/swagger-ui/**",
+        // other public endpoints of your API may be appended to this array
+        "favicon.ico"
+    };
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http    .cors().and()
+        http.cors().and()
                 .csrf().disable().authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers(AUTH_WHITELIST).permitAll()
                 .antMatchers(HttpMethod.POST, LOGIN_ENDPOINT).permitAll()
                 .antMatchers(HttpMethod.GET, FILE_ENDPOINT).permitAll()
                 .anyRequest().authenticated()
@@ -52,17 +65,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         UsernamePasswordAuthenticationFilter.class);
     }
 
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         auth.authenticationProvider(authenticationProvider());
     }
 
-
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider
-                = new DaoAuthenticationProvider();
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(encoder());
         return authProvider;
