@@ -1,5 +1,6 @@
 package demo.reactAdmin;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 import javax.servlet.ServletContext;
@@ -21,24 +22,13 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import demo.reactAdmin.crud.services.DataInitService;
 import demo.reactAdmin.providers.ObjectMapperProvider;
-// import springfox.documentation.builders.PathSelectors;
-// import springfox.documentation.builders.RequestHandlerSelectors;
-// import springfox.documentation.service.ApiInfo;
-// import springfox.documentation.service.Contact;
-// import springfox.documentation.spi.DocumentationType;
-// import springfox.documentation.spring.web.plugins.Docket;
-// import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication(scanBasePackages = {"demo.reactAdmin", "springboot.rest"})
-// @EnableSwagger2
 public class ReactAdminDemoApplication {
 
 
     @Autowired
     private DataInitService dataInitService;
-
-    @Autowired
-    private ServletContext servletContext;
 
     @Autowired
     private ObjectMapperProvider objMapperProvider;
@@ -48,16 +38,10 @@ public class ReactAdminDemoApplication {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("*");
-        config.addAllowedHeader("*");  // Insecure, but for demo purposes it's ok
-        config.addAllowedHeader("content-range");
-        config.addExposedHeader("X-Total-Count");
-        config.addExposedHeader("content-range");
-        config.addExposedHeader("Content-Type");
-        config.addExposedHeader("Accept");
-        config.addExposedHeader("X-Requested-With");
-        config.addExposedHeader("remember-me");
-        config.addAllowedMethod("*");
+        config.setAllowedOriginPatterns(Collections.singletonList("*")); // Insecure, but for demo purposes it's ok
+        config.setAllowedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "responseType", "Authorization", "x-authorization", "content-range"));
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "OPTIONS", "DELETE", "PATCH"));
+        config.setExposedHeaders(Arrays.asList("X-Total-Count", "X-Total-Count", "content-range", "Content-Type", "Accept", "X-Requested-With", "remember-me"));
         source.registerCorsConfiguration("/**", config);
         return new CorsFilter(source);
     }
@@ -76,9 +60,7 @@ public class ReactAdminDemoApplication {
     @Bean
     public ViewResolver internalResourceViewResolver() {
         InternalResourceViewResolver bean = new InternalResourceViewResolver();
-        //bean.setViewClass(JstlView.class);
         bean.setPrefix("/uploaded/");
-        //bean.setSuffix(".jsp");
         return bean;
     }
 
@@ -86,61 +68,5 @@ public class ReactAdminDemoApplication {
     public ObjectMapper objectMapper() {
         return objMapperProvider.getObjectMapper();
     }
-
-    // @Bean
-    // public Docket api() {
-    //     return new Docket(DocumentationType.SWAGGER_2)
-    //             .pathProvider(new RelativePathProvider(servletContext) {
-    //                 @Override
-    //                 public String getApplicationBasePath() {
-    //                     return "/api/v1";
-    //                 }
-    //             })
-    //             .select()
-    //             .apis(RequestHandlerSelectors.any())
-    //             .paths(PathSelectors.any())
-
-    //             .build();
-    // }
-
-    // @Bean
-    // public Docket api() { 
-
-    //     Docket docket = new Docket(DocumentationType.SWAGGER_2)
-    //       .select()                                  
-    //       .apis(RequestHandlerSelectors.any())  
-    //       .paths(PathSelectors.ant("/api/v1/**"))            
-    //     //   .paths(PathSelectors.any())                          
-    //       .build();    
-          
-    //     docket.pathMapping("/api/v1");
-
-    //     return docket;
-    // }
-
-    // private ApiInfo apiInfo() {
-    //     return new ApiInfo("MyApp Rest APIs",
-    //             "APIs for MyApp.",
-    //             "1.0",
-    //             "Terms of service",
-    //             new Contact("test", "www.org.com", "test@emaildomain.com"),
-    //             "License of API",
-    //             "API license URL",
-    //             Collections.emptyList());
-    // }
-
-    // @Bean
-    // public Docket api() {
-    //     Docket docket = new Docket(DocumentationType.OAS_30)
-    //             .apiInfo(apiInfo())
-    //             .select()
-    //             .apis(RequestHandlerSelectors.any())
-    //             .paths(PathSelectors.ant("/api/v1/**"))  
-    //             .build();
-
-    //             docket.pathMapping("/api/v1");
-
-    //             return docket;
-    // }
 
 }

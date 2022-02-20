@@ -19,6 +19,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String LOGIN_ENDPOINT = "/api/v1/auth/login";
     private static final String FILE_ENDPOINT = "/api/v1/file/**";
+    private static final String SWAGGER_UI_PATH = "/swagger-ui.html";
 
     @Autowired
     private MyUserDetailsService userDetailsService;
@@ -26,10 +27,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private PasswordEncoderProvider passwordEncoderProvider;
 
-    // @Override
-    // public void configure(WebSecurity web) throws Exception {
-    //     web.ignoring().antMatchers(FILE_ENDPOINT, SWAGGER_UI_PATH);
-    // }
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(FILE_ENDPOINT, SWAGGER_UI_PATH);
+    }
     
     private static final String[] AUTH_WHITELIST = {
         // -- Swagger UI v2
@@ -52,6 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and()
                 .csrf().disable().authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers(AUTH_WHITELIST).permitAll()
                 .antMatchers(HttpMethod.POST, LOGIN_ENDPOINT).permitAll()
                 .antMatchers(HttpMethod.GET, FILE_ENDPOINT).permitAll()
@@ -64,7 +66,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(new JWTAuthenticationFilter(),
                         UsernamePasswordAuthenticationFilter.class);
     }
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

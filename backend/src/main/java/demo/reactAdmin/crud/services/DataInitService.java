@@ -102,9 +102,6 @@ public class DataInitService {
         Group orderedOnce = new Group("ordered_once");
         groupRepository.save(orderedOnce);
 
-
-
-
         PlatformUser admin = new PlatformUser();
         admin.username = "demo";
         admin.password = passEncodeProvider.getEncoder().encode("demo");

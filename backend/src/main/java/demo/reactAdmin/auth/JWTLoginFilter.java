@@ -1,4 +1,5 @@
 package demo.reactAdmin.auth;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,9 +30,6 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
                 .readValue(req.getInputStream(), AccountCredentials.class);
         String username = creds.getUsername();
         String password = creds.getPassword();
-
-
-
 
         return getAuthenticationManager().authenticate(
                 new UsernamePasswordAuthenticationToken(

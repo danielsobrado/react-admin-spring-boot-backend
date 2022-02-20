@@ -1,6 +1,5 @@
 package demo.reactAdmin.auth;
 
-
 public class AccountCredentials {
 
     private String username;
@@ -21,5 +20,4 @@ public class AccountCredentials {
     public void setPassword(String password) {
         this.password = password;
     }
-    // getters & setters
 }
