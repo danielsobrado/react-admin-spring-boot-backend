@@ -41,7 +41,7 @@ spring.jpa.properties.hibernate.dialect.storage_engine=innodb
 
 The UI for swagger can be found on: [swagger](http://localhost:8080/swagger-ui/index.html)
 
-The OpenAPI configuration is also found on **`application.properties`**:
+The OpenAPI configuration is found on **`application.properties`**:
 
 ```properties
 ### Swagger / Open API
@@ -49,6 +49,8 @@ springdoc.api-docs.path=/v3/api-docs
 springdoc.swagger-ui.path=/swagger-ui.html
 springdoc.api-docs.enabled=true 
 ```
+
+** Note: ** In case of issues with the browser hanging, use it in a incognito session. (It might be related to [circular dependencies](https://stackoverflow.com/questions/35605427/swagger-ui-freezes-after-api-fetch-and-browser-crashes). )
 
 ## How to run: Front-End
 
