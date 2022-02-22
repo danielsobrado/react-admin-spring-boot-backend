@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Field, withTypes } from 'react-final-form';
+import { useLocation } from 'react-router-dom';
 
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import TextField from '@material-ui/core/TextField';
-import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import {
+    Avatar,
+    Button,
+    Card,
+    CardActions,
+    CircularProgress,
+    TextField,
+} from '@material-ui/core';
+import { createTheme, makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import LockIcon from '@material-ui/icons/Lock';
+import { Notification, useTranslate, useLogin, useNotify } from 'react-admin';
 
-import { Notification } from 'react-admin';
-import { useTranslate, useLogin, useNotify } from 'ra-core';
 import { lightTheme } from './themes';
-import { Location } from 'history';
 
 const useStyles = makeStyles(theme => ({
     main: {
@@ -71,19 +73,20 @@ const renderInput = ({
     />
 );
 
-export interface FormValues {
+interface FormValues {
     username?: string;
     password?: string;
 }
 
 const { Form } = withTypes<FormValues>();
 
-const Login = ({ location }: { location: Location }) => {
+const Login = () => {
     const [loading, setLoading] = useState(false);
     const translate = useTranslate();
     const classes = useStyles();
     const notify = useNotify();
     const login = useLogin();
+    const location = useLocation<{ nextPathname: string } | null>();
 
     const handleSubmit = (auth: FormValues) => {
         setLoading(true);
@@ -96,7 +99,17 @@ const Login = ({ location }: { location: Location }) => {
                         : typeof error === 'undefined' || !error.message
                         ? 'ra.auth.sign_in_error'
                         : error.message,
-                    'warning'
+                    {
+                        type: 'warning',
+                        messageArgs: {
+                            _:
+                                typeof error === 'string'
+                                    ? error
+                                    : error && error.message
+                                    ? error.message
+                                    : undefined,
+                        },
+                    }
                 );
             }
         );
@@ -186,7 +199,7 @@ Login.propTypes = {
 // Because otherwise the useStyles() hook used in Login won't get
 // the right theme
 const LoginWithTheme = (props: any) => (
-    <ThemeProvider theme={createMuiTheme(lightTheme)}>
+    <ThemeProvider theme={createTheme(lightTheme)}>
         <Login {...props} />
     </ThemeProvider>
 );

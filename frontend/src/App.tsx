@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { fetchUtils, Admin, Resource } from 'react-admin';
+import * as React from 'react';
+import { Admin, Resource } from 'react-admin';
 import polyglotI18nProvider from 'ra-i18n-polyglot';
-
-import './App.css';
 
 import authProvider from './authProvider';
 import themeReducer from './themeReducer';
@@ -17,8 +15,7 @@ import products from './products';
 import invoices from './invoices';
 import categories from './categories';
 import reviews from './reviews';
-
-import dataProvider from './dataProvider';
+import dataProviderFactory from './dataProvider';
 
 const i18nProvider = polyglotI18nProvider(locale => {
     if (locale === 'fr') {
@@ -30,19 +27,10 @@ const i18nProvider = polyglotI18nProvider(locale => {
 }, 'en');
 
 const App = () => {
-
-    if (!dataProvider) {
-        return (
-            <div className="loader-container">
-                <div className="loader">Loading...</div>
-            </div>
-        );
-    }
-
     return (
         <Admin
             title=""
-            dataProvider={dataProvider}
+            dataProvider={dataProviderFactory('rest')}
             customReducers={{ theme: themeReducer }}
             customRoutes={customRoutes}
             authProvider={authProvider}
@@ -50,6 +38,7 @@ const App = () => {
             loginPage={Login}
             layout={Layout}
             i18nProvider={i18nProvider}
+            disableTelemetry
         >
             <Resource name="customers" {...visitors} />
             <Resource

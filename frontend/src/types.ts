@@ -1,4 +1,4 @@
-import { ReduxState, Record, Identifier } from 'ra-core';
+import { ReduxState, Record, Identifier } from 'react-admin';
 
 export type ThemeName = 'light' | 'dark';
 
@@ -26,6 +26,7 @@ export interface Customer extends Record {
     first_name: string;
     last_name: string;
     address: string;
+    stateAbbr: string;
     city: string;
     zipcode: string;
     avatar: string;
@@ -40,21 +41,33 @@ export interface Customer extends Record {
     total_spent: number;
 }
 
+export type OrderStatus = 'ordered' | 'delivered' | 'cancelled';
+
 export interface Order extends Record {
+    status: OrderStatus;
     basket: BasketItem[];
+    date: Date;
+    total: number;
 }
 
 export interface BasketItem {
-    product_id: string;
+    product_id: Identifier;
     quantity: number;
 }
 
-/**
- * Types to eventually add in react-admin
- */
-export interface FieldProps<T extends Record = Record> {
-    addLabel?: boolean;
-    label?: string;
-    record?: T;
-    source?: string;
+export interface Invoice extends Record {}
+
+export type ReviewStatus = 'accepted' | 'pending' | 'rejected';
+
+export interface Review extends Record {
+    date: Date;
+    status: ReviewStatus;
+    customer_id: Identifier;
+    product_id: Identifier;
+}
+
+declare global {
+    interface Window {
+        restServer: any;
+    }
 }

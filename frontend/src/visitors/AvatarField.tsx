@@ -1,23 +1,20 @@
-import React, { FC } from 'react';
+import * as React from 'react';
 import Avatar from '@material-ui/core/Avatar';
-import { Customer, FieldProps } from '../types';
+import { FieldProps } from 'react-admin';
+import { Customer } from '../types';
 
 interface Props extends FieldProps<Customer> {
     className?: string;
     size?: string;
 }
-const AvatarField: FC<Props> = ({ record, size, className }) =>
+
+const AvatarField = ({ record, size = '25', className }: Props) =>
     record ? (
         <Avatar
             src={`${record.avatar}?size=${size}x${size}`}
-            sizes={size}
-            style={{ width: size, height: size }}
+            style={{ width: parseInt(size, 10), height: parseInt(size, 10) }}
             className={className}
         />
     ) : null;
-
-AvatarField.defaultProps = {
-    size: '25',
-};
 
 export default AvatarField;

@@ -1,8 +1,10 @@
-import React, { FC } from 'react';
+import * as React from 'react';
 import {
     Datagrid,
     Edit,
+    EditProps,
     EditButton,
+    FieldProps,
     NumberField,
     ReferenceManyField,
     SimpleForm,
@@ -12,9 +14,10 @@ import {
 
 import ThumbnailField from '../products/ThumbnailField';
 import ProductRefField from '../products/ProductRefField';
-import { FieldProps, Category } from '../types';
+import { Category } from '../types';
 
-const CategoryTitle: FC<FieldProps<Category>> = ({ record }) => {
+const CategoryTitle = (props: FieldProps<Category>) => {
+    const { record } = props;
     const translate = useTranslate();
     return record ? (
         <span>
@@ -24,7 +27,7 @@ const CategoryTitle: FC<FieldProps<Category>> = ({ record }) => {
     ) : null;
 };
 
-const CategoryEdit = (props: any) => (
+const CategoryEdit = (props: EditProps) => (
     <Edit title={<CategoryTitle />} {...props}>
         <SimpleForm>
             <TextInput source="name" />
@@ -32,7 +35,8 @@ const CategoryEdit = (props: any) => (
                 reference="products"
                 target="category_id"
                 label="resources.categories.fields.products"
-                perPage={5}
+                perPage={20}
+                fullWidth
             >
                 <Datagrid>
                     <ThumbnailField />
@@ -50,6 +54,7 @@ const CategoryEdit = (props: any) => (
                         options={{ minimumFractionDigits: 2 }}
                     />
                     <NumberField source="stock" />
+                    <NumberField source="sales" />
                     <EditButton />
                 </Datagrid>
             </ReferenceManyField>

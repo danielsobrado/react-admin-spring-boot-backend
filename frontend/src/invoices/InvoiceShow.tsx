@@ -1,15 +1,20 @@
-import React, { FC } from 'react';
+import * as React from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { useShowController, ReferenceField, TextField } from 'react-admin';
+import {
+    useShowController,
+    ReferenceField,
+    TextField,
+    FieldProps,
+} from 'react-admin';
 
 import Basket from '../orders/Basket';
-import { FieldProps, Customer } from '../types';
+import { Customer, Invoice } from '../types';
 
-const CustomerField: FC<FieldProps<Customer>> = ({ record }) =>
+const CustomerField = ({ record }: FieldProps<Customer>) =>
     record ? (
         <Typography>
             {record.first_name} {record.last_name}
@@ -21,7 +26,7 @@ const CustomerField: FC<FieldProps<Customer>> = ({ record }) =>
     ) : null;
 
 const InvoiceShow = (props: any) => {
-    const { record } = useShowController(props);
+    const { record } = useShowController<Invoice>(props);
     const classes = useStyles();
 
     if (!record) return null;
@@ -41,7 +46,7 @@ const InvoiceShow = (props: any) => {
                     </Grid>
                 </Grid>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} alignContent="flex-end">
+                    <Grid item xs={12} container alignContent="flex-end">
                         <ReferenceField
                             resource="invoices"
                             reference="customers"

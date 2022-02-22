@@ -10,6 +10,13 @@
 
 # production
 /frontend/build
+/frontend/static
+/frontend/dist
+
+# docs
+docs/_site/
+docs/.jekyll-metadata
+docs/.jekyll-cache
 
 # misc
 .DS_Store
@@ -22,3 +29,7 @@
 /frontend/yarn-debug.log*
 /frontend/yarn-error.log*
 backend/dependency-reduced-pom.xml
+
+npm-debug.log
+yarn-error.log
+lerna-debug.log

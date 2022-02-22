@@ -1,13 +1,14 @@
-import React, { FC } from 'react';
+import * as React from 'react';
 import Icon from '@material-ui/icons/Stars';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-import { FieldProps } from '../types';
+import { FieldProps } from 'react-admin';
 
 const useStyles = makeStyles({
     root: {
         opacity: 0.87,
         whiteSpace: 'nowrap',
+        display: 'flex',
     },
     large: {
         width: 20,
@@ -15,21 +16,18 @@ const useStyles = makeStyles({
     },
     small: {
         width: 15,
-        haight: 15,
+        height: 15,
     },
 });
 
 interface OwnProps {
-    size: 'large' | 'small';
+    size?: 'large' | 'small';
 }
 
-const StarRatingField: FC<FieldProps & OwnProps> = ({
-    record,
-    size = 'large',
-}) => {
+const StarRatingField = ({ record, size = 'large' }: FieldProps & OwnProps) => {
     const classes = useStyles();
     return record ? (
-        <span>
+        <span className={classes.root}>
             {Array(record.rating)
                 .fill(true)
                 .map((_, i) => (

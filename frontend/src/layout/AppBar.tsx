@@ -1,4 +1,5 @@
-import React, { forwardRef } from 'react';
+import * as React from 'react';
+import { forwardRef } from 'react';
 import { AppBar, UserMenu, MenuItemLink, useTranslate } from 'react-admin';
 import Typography from '@material-ui/core/Typography';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -21,12 +22,15 @@ const useStyles = makeStyles({
 const ConfigurationMenu = forwardRef<any, any>((props, ref) => {
     const translate = useTranslate();
     return (
+       // https://github.com/marmelab/react-admin/issues/6582
+       // @ts-ignore
         <MenuItemLink
             ref={ref}
             to="/configuration"
             primaryText={translate('pos.configuration')}
             leftIcon={<SettingsIcon />}
             onClick={props.onClick}
+            sidebarIsOpen
         />
     );
 });
@@ -40,7 +44,7 @@ const CustomUserMenu = (props: any) => (
 const CustomAppBar = (props: any) => {
     const classes = useStyles();
     return (
-        <AppBar {...props} userMenu={<CustomUserMenu />}>
+        <AppBar {...props} elevation={1} userMenu={<CustomUserMenu />}>
             <Typography
                 variant="h6"
                 color="inherit"

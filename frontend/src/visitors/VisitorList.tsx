@@ -1,55 +1,64 @@
-import React from 'react';
+import * as React from 'react';
 import {
     BooleanField,
     Datagrid,
     DateField,
     DateInput,
-    Filter,
     List,
+    ListProps,
     NullableBooleanInput,
     NumberField,
     SearchInput,
 } from 'react-admin';
-import { useMediaQuery, makeStyles, Theme } from '@material-ui/core';
+import { useMediaQuery, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 import SegmentsField from './SegmentsField';
 import SegmentInput from './SegmentInput';
 import CustomerLinkField from './CustomerLinkField';
 import ColoredNumberField from './ColoredNumberField';
 import MobileGrid from './MobileGrid';
+import VisitorListAside from './VisitorListAside';
+import { ReactElement } from 'react';
 
-const VisitorFilter = (props: any) => (
-    <Filter {...props}>
-        <SearchInput source="q" alwaysOn />
-        <DateInput source="last_seen_gte" />
-        <NullableBooleanInput source="has_ordered" />
-        <NullableBooleanInput source="has_newsletter" defaultValue />
-        <SegmentInput />
-    </Filter>
-);
+const visitorFilters = [
+    <SearchInput source="q" alwaysOn />,
+    <DateInput source="last_seen_gte" />,
+    <NullableBooleanInput source="has_ordered" />,
+    <NullableBooleanInput source="has_newsletter" defaultValue />,
+    <SegmentInput />,
+];
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     nb_commands: { color: 'purple' },
-});
+    hiddenOnSmallScreens: {
+        display: 'table-cell',
+        [theme.breakpoints.down('md')]: {
+            display: 'none',
+        },
+    },
+}));
 
-const VisitorList = (props: any) => {
+const VisitorList = (props: ListProps): ReactElement => {
     const classes = useStyles();
     const isXsmall = useMediaQuery<Theme>(theme =>
         theme.breakpoints.down('xs')
     );
+    const isSmall = useMediaQuery<Theme>(theme => theme.breakpoints.down('sm'));
     return (
         <List
             {...props}
-            filters={<VisitorFilter />}
+            filters={isSmall ? visitorFilters : undefined}
             sort={{ field: 'last_seen', order: 'DESC' }}
             perPage={25}
+            aside={<VisitorListAside />}
         >
             {isXsmall ? (
                 <MobileGrid />
             ) : (
                 <Datagrid optimized rowClick="edit">
                     <CustomerLinkField />
-                    <DateField source="last_seen" type="date" />
+                    <DateField source="last_seen" />
                     <NumberField
                         source="nb_commands"
                         label="resources.customers.fields.commands"
@@ -61,7 +70,10 @@ const VisitorList = (props: any) => {
                     />
                     <DateField source="latest_purchase" showTime />
                     <BooleanField source="has_newsletter" label="News." />
-                    <SegmentsField />
+                    <SegmentsField
+                        cellClassName={classes.hiddenOnSmallScreens}
+                        headerClassName={classes.hiddenOnSmallScreens}
+                    />
                 </Datagrid>
             )}
         </List>

@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
+import * as React from 'react';
 import Chip from '@material-ui/core/Chip';
-import { useTranslate } from 'react-admin';
+import { useTranslate, FieldProps } from 'react-admin';
 import segments from '../segments/data';
-import { FieldProps, Customer } from '../types';
-import { makeStyles } from '@material-ui/core';
+import { Customer } from '../types';
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
     main: {
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     chip: { margin: 4 },
 });
 
-const SegmentsField: FC<FieldProps<Customer>> = ({ record }) => {
+const SegmentsField = ({ record }: FieldProps<Customer>) => {
     const translate = useTranslate();
     const classes = useStyles();
 
@@ -27,6 +27,7 @@ const SegmentsField: FC<FieldProps<Customer>> = ({ record }) => {
 
                     return segment ? (
                         <Chip
+                            size="small"
                             key={segment.id}
                             className={classes.chip}
                             label={translate(segment.name)}
