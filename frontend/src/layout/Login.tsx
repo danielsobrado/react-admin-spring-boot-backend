@@ -73,7 +73,7 @@ const renderInput = ({
     />
 );
 
-interface FormValues {
+export interface FormValues {
     username?: string;
     password?: string;
 }

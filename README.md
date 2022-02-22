@@ -13,7 +13,21 @@ Work In Progress: Adapt Auth and Data providers to make use of Spring Boot Backe
 The following instructions describe how to build and deploy this example:
 ## MySQL setup
 
-Install MySQL and create the demo database and user required for this example to run:
+As a reference, I'm using Ubuntu 20.04 on WSL2 for this project.
+
+Install MySQL:
+
+```bash
+sudo apt install mysql-server
+```
+
+Start MySQL with:
+
+```bash
+sudo /etc/init.d/mysql start
+```
+
+ And create the demo database and user required for this example to run:
 
 ```sql
 CREATE DATABASE demo;
@@ -70,17 +84,13 @@ And start it with:
 yarn start
 ```
 
-WIP
-
 ## How to run: Back-End
 
-The Spring Boot backend is available in the /backend folder, you can compile it with:
+The Spring Boot backend is available in the /backend folder, you can compile it and start it with:
 
 ```
 mvn spring-boot:run
 ```
-
-WIP
 
 ## Run as a Docker container
 

@@ -15,7 +15,7 @@ import products from './products';
 import invoices from './invoices';
 import categories from './categories';
 import reviews from './reviews';
-import dataProviderFactory from './dataProvider';
+import dataProvider from './dataProvider';
 
 const i18nProvider = polyglotI18nProvider(locale => {
     if (locale === 'fr') {
@@ -30,7 +30,7 @@ const App = () => {
     return (
         <Admin
             title=""
-            dataProvider={dataProviderFactory('rest')}
+            dataProvider={dataProvider}
             customReducers={{ theme: themeReducer }}
             customRoutes={customRoutes}
             authProvider={authProvider}
