@@ -230,6 +230,11 @@
             <artifactId>jackson-dataformat-csv</artifactId>
             <version>2.13.1</version>
         </dependency>
+        <dependency>
+            <groupId>net.ttddyy</groupId>
+            <artifactId>datasource-proxy</artifactId>
+            <version>1.7</version>
+        </dependency>
     </dependencies>
 
 </project>

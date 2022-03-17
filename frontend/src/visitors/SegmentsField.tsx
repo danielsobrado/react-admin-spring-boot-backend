@@ -24,7 +24,6 @@ const SegmentsField = ({ record }: FieldProps<Customer>) => {
             {record.groups &&
                 record.groups.map(segmentId => {
                     const segment = segments.find(s => s.id === segmentId);
-
                     return segment ? (
                         <Chip
                             size="small"

@@ -1,3 +1,4 @@
+import { ContactlessOutlined } from '@material-ui/icons';
 import { stringify } from 'query-string';
 import {
     CREATE, DELETE,
@@ -27,6 +28,18 @@ const convertDataProviderRequestToHTTP = (type : any, resource : any, params : a
         };
         console.log("GET_LIST url: " + `${API_URL}/${resource}?${stringify(query)}`);
         return { url: `${API_URL}/${resource}?${stringify(query)}` };
+
+        // const httpClient = fetchUtils.fetchJson;
+
+        // return httpClient(`${API_URL}/${resource}?${stringify(query)}`)
+        // .then(({ json }) => {
+        //     console.log("GET_LIST reply:" + json);
+        //     return ({data: json });
+        // })
+        // .catch(err => {
+        //     return console.log(err)
+        //  })
+
     }
     case GET_ONE:
         console.log("GET_ONE url: " + `${API_URL}/${resource}/${params.id}` );
@@ -141,19 +154,20 @@ const convertHTTPResponseToDataProvider = (response : any, type : any, resource 
     const { headers, json } = response;
     switch (type) {
         case GET_LIST: {
-            console.log("GET_LIST reply:" + json.content);
+            console.log("GET_LIST " + resource + " reply:" + json.content);
             return {
                 data: json.content.at(0).content,
                 total: parseInt(json.content.at(0).total, 10),
             };
         }
         case GET_MANY:
-            console.log("GET_MANY reply:" + json);
+            console.log("GET_MANY " + resource + " reply:" + json);
             return {
                 data: json.content.at(0).content,
                 total: parseInt(json.content.at(0).total, 10),
             };
         case GET_ONE:
+            console.log("GET_ONE " + resource + " reply:" + json);
             return {
                 data: json
             };
@@ -184,5 +198,15 @@ export default (type : any, resource : any, params : any) : any => {
     let token = localStorage.getItem('token');
     options.headers.append('X-Authorization','Bearer ' + token);
     return fetchJson(url, options)
-        .then((response: any) => convertHTTPResponseToDataProvider(response, type, resource, params));
+        .then((response: any) => {
+            console.log("response: " + response);
+            return convertHTTPResponseToDataProvider(response, type, resource, params)
+        })
+        .catch(err => {
+            return console.log(err)
+        });
 };
+
+function httpClient(arg0: string, arg1: { method: string; body: string; }) {
+    throw new Error('Function not implemented.');
+}

@@ -33,3 +33,5 @@ backend/dependency-reduced-pom.xml
 npm-debug.log
 yarn-error.log
 lerna-debug.log
+logs/*.gz
+logs/*.log

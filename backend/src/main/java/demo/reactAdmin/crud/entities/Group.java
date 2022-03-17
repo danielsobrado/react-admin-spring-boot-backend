@@ -1,6 +1,7 @@
 package demo.reactAdmin.crud.entities;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -10,6 +11,7 @@ import javax.persistence.Table;
 @Table(name = "`Group`")
 public class Group {
     @Id
+    @JsonValue
     public String id;
 
     public Group() {}
