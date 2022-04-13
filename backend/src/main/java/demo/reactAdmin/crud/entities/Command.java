@@ -1,14 +1,26 @@
 package demo.reactAdmin.crud.entities;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import org.hibernate.annotations.Where;
-
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import org.hibernate.annotations.Where;
+
+import demo.reactAdmin.crud.entities.deserializers.CommandDeserializer;
+import demo.reactAdmin.crud.entities.deserializers.CustomCustomerSerializer;
+
 @Entity
 @Where(clause="published=1")
+// @JsonDeserialize(using = CommandDeserializer.class)
 public class Command {
     @Id
     public Integer id;
@@ -18,6 +30,8 @@ public class Command {
     public String date;
 
     @ManyToOne(cascade = {CascadeType.DETACH})
+    // @JsonIdentityReference(alwaysAsId = true)
+    @JsonSerialize(using = CustomCustomerSerializer.class)
     public Customer customerId;
 
     public float totalExTaxes;

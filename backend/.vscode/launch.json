@@ -9,6 +9,13 @@
             "name": "Launch ReactAdminDemoApplication",
             "request": "launch",
             "mainClass": "demo.reactAdmin.ReactAdminDemoApplication",
+            "projectName": "react-admin-spring-boot-backend"
+        },
+        {
+            "type": "java",
+            "name": "Launch ReactAdminDemoApplication",
+            "request": "launch",
+            "mainClass": "demo.reactAdmin.ReactAdminDemoApplication",
             "projectName": "react-admin-demo-java-rest"
         },
         {

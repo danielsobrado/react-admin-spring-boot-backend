@@ -1,13 +1,27 @@
 package demo.reactAdmin.crud.entities;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import org.hibernate.annotations.Where;
 
-import javax.persistence.*;
-import java.util.Set;
+import demo.reactAdmin.crud.entities.resolvers.CustomerIdResolver;
 
 @Entity
 @Where(clause="published=1")
+// @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, 
+//     resolver = CustomerIdResolver.class, property = "id")
+// // See:
 public class Customer {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
