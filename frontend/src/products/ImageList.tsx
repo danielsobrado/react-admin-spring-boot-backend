@@ -1,7 +1,7 @@
 import * as React from 'react';
-import MuiGridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
+import MuiImageList from '@material-ui/core/ImageList';
+import ImageListItem  from '@material-ui/core/ImageListItem';
+import ImageListItemBar from '@material-ui/core/ImageListItemBar';
 import { makeStyles } from '@material-ui/core/styles';
 import withWidth, { WithWidth } from '@material-ui/core/withWidth';
 import {
@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom';
 import { Breakpoint } from '@material-ui/core/styles/createBreakpoints';
 
 const useStyles = makeStyles(theme => ({
-    gridList: {
+    ImageList: {
         margin: 0,
     },
     tileBar: {
@@ -46,26 +46,26 @@ const getColsForWidth = (width: Breakpoint) => {
 const times = (nbChildren: number, fn: (key: number) => any) =>
     Array.from({ length: nbChildren }, (_, key) => fn(key));
 
-const LoadingGridList = (props: GridProps & { nbItems?: number }) => {
+const LoadingImageList = (props: GridProps & { nbItems?: number }) => {
     const { width, nbItems = 20 } = props;
     const classes = useStyles();
     return (
-        <MuiGridList
-            cellHeight={180}
+        <MuiImageList
+            rowHeight={180}
             cols={getColsForWidth(width)}
-            className={classes.gridList}
+            className={classes.ImageList}
         >
             {' '}
             {times(nbItems, key => (
-                <GridListTile key={key}>
+                <ImageListItem key={key}>
                     <div className={classes.placeholder} />
-                </GridListTile>
+                </ImageListItem>
             ))}
-        </MuiGridList>
+        </MuiImageList>
     );
 };
 
-const LoadedGridList = (props: GridProps) => {
+const LoadedImageList = (props: GridProps) => {
     const { width } = props;
     const { ids, data, basePath } = useListContext();
     const classes = useStyles();
@@ -73,20 +73,20 @@ const LoadedGridList = (props: GridProps) => {
     if (!ids || !data) return null;
 
     return (
-        <MuiGridList
-            cellHeight={180}
+        <MuiImageList
+            rowHeight={180}
             cols={getColsForWidth(width)}
-            className={classes.gridList}
+            className={classes.ImageList}
         >
             {ids.map((id: Identifier) => (
-                <GridListTile
+                <ImageListItem
                     // @ts-ignore
                     component={Link}
                     key={id}
                     to={linkToRecord(basePath, data[id].id)}
                 >
                     <img src={data[id].thumbnail} alt="" />
-                    <GridListTileBar
+                    <ImageListItemBar
                         className={classes.tileBar}
                         title={data[id].reference}
                         subtitle={
@@ -105,22 +105,22 @@ const LoadedGridList = (props: GridProps) => {
                             </span>
                         }
                     />
-                </GridListTile>
+                </ImageListItem>
             ))}
-        </MuiGridList>
+        </MuiImageList>
     );
 };
 
 interface GridProps extends Omit<DatagridProps, 'width'>, WithWidth {}
 
-const GridList = (props: WithWidth) => {
+const ImageList = (props: WithWidth) => {
     const { width } = props;
     const { loaded } = useListContext();
     return loaded ? (
-        <LoadedGridList width={width} />
+        <LoadedImageList width={width} />
     ) : (
-        <LoadingGridList width={width} />
+        <LoadingImageList width={width} />
     );
 };
 
-export default withWidth()(GridList);
+export default withWidth()(ImageList);

@@ -22,7 +22,7 @@ import {
     useTranslate,
 } from 'react-admin';
 
-import GridList from './GridList';
+import ImageList from './ImageList';
 import Aside from './Aside';
 
 const useQuickFilterStyles = makeStyles(theme => ({
@@ -95,7 +95,7 @@ const ProductListView = ({ isSmall }: { isSmall: boolean }) => {
             <Box display="flex">
                 <Aside />
                 <Box width={isSmall ? 'auto' : 'calc(100% - 16em)'}>
-                    <GridList />
+                    <ImageList />
                     <Pagination rowsPerPageOptions={[10, 20, 40]} />
                 </Box>
             </Box>
