@@ -10,12 +10,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import org.hibernate.annotations.Where;
 
-import demo.reactAdmin.crud.entities.deserializers.CommandDeserializer;
 import demo.reactAdmin.crud.entities.deserializers.CustomCustomerSerializer;
 
 @Entity
